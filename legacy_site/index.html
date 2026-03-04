@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kokomo Sunset Resort - Luxurious Tropical Escape</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+</head>
+<body class="antialiased">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+        <h2>🌴 Welcome to Kokomo Sunset Resort</h2>
+        <p class="loading-subtext">Luxury, Nature & Memories</p>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="common-overlay" class="overlay" onclick="closeAllPopups()"></div>
+
+    <!-- Side Menu -->
+    <div id="side-menu" class="side-menu">
+        <button onclick="closeAllPopups()" class="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="menu-header">
+            <h2>Menu</h2>
+        </div>
+        <div class="menu-content">
+            <nav class="menu-nav">
+                <a href="#home" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-home menu-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#rooms" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-bed menu-icon"></i>
+                    <span>Accommodations</span>
+                </a>
+                <a href="#activities" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-swimmer menu-icon"></i>
+                    <span>Activities</span>
+                </a>
+                <a href="#dining" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-utensils menu-icon"></i>
+                    <span>Dining & Bar</span>
+                </a>
+                <a href="#cafe" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-coffee menu-icon"></i>
+                    <span>Cafe Kokomo</span>
+                </a>
+                <a href="#amenities" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-swimming-pool menu-icon"></i>
+                    <span>Amenities</span>
+                </a>
+                <a href="#gallery" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-images menu-icon"></i>
+                    <span>Gallery</span>
+                </a>
+                <a href="#location" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-map-marker-alt menu-icon"></i>
+                    <span>Location</span>
+                </a>
+                <a href="#reviews" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-star menu-icon"></i>
+                    <span>Customer Reviews</span>
+                </a>
+                <a href="#contact" onclick="closeAllPopups()" class="menu-link">
+                    <i class="fas fa-phone-alt menu-icon"></i>
+                    <span>Contact Us</span>
+                </a>
+            </nav>
+            <div class="menu-footer">
+                <p class="footer-text">Kokomo Sunset Resort</p>
+                <p class="footer-tagline">Luxury, Nature & Memories</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Booking Modal with Correct Rooms -->
+    <div id="booking-modal" class="modal">
+        <button onclick="closeAllPopups()" class="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-content">
+            <h2>Book Your Stay</h2>
+            <p class="booking-subtitle">Fill in your details to check availability</p>
+            
+            <div class="booking-progress">
+                <div class="progress-step active" data-step="1">1. Dates</div>
+                <div class="progress-step" data-step="2">2. Room</div>
+                <div class="progress-step" data-step="3">3. Details</div>
+            </div>
+            
+            <form id="booking-form">
+                <!-- Step 1: Dates & Guests -->
+                <div class="form-step active" id="step-1">
+                    <div class="form-group">
+                        <label for="checkin-date"><i class="fas fa-calendar-check"></i> Check-in Date</label>
+                        <input type="date" id="checkin-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkout-date"><i class="fas fa-calendar-times"></i> Check-out Date</label>
+                        <input type="date" id="checkout-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guests"><i class="fas fa-users"></i> Number of Guests</label>
+                        <select id="guests" required>
+                            <option value="">Select Guests</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5+ Guests</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="children"><i class="fas fa-child"></i> Children (Under 12)</label>
+                        <select id="children">
+                            <option value="0">0 Children</option>
+                            <option value="1">1 Child</option>
+                            <option value="2">2 Children</option>
+                            <option value="3">3+ Children</option>
+                        </select>
+                    </div>
+                    
+                    <button type="button" class="primary-btn next-step" data-next="2">Next: Select Room</button>
+                </div>
+                
+                <!-- Step 2: Room Selection with Correct Rooms -->
+                <div class="form-step" id="step-2">
+                    <div class="room-selection">
+                        <h3>Select Your Room</h3>
+                        <div class="room-options">
+                            <!-- Deluxe Couple -->
+                            <div class="room-option" data-room="deluxe-couple">
+                                <img src="images/rooms/deluxe-couple.jpg" alt="Deluxe Couple" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=800'">
+                                <div class="room-option-info">
+                                    <h4>Deluxe Couple</h4>
+                                    <p class="price">BDT 10,000++ / night</p>
+                                    <p class="room-features">Queen Bed • Garden View • Room Service</p>
+                                </div>
+                                <div class="room-select-radio">
+                                    <input type="radio" name="room-type" id="deluxe-couple-room" value="deluxe-couple">
+                                    <label for="deluxe-couple-room">Select</label>
+                                </div>
+                            </div>
+                            
+                            <!-- Superior Twin -->
+                            <div class="room-option" data-room="superior-twin">
+                                <img src="images/rooms/superior-twin.jpg" alt="Superior Twin" onerror="this.src='https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=800'">
+                                <div class="room-option-info">
+                                    <h4>Superior Twin</h4>
+                                    <p class="price">BDT 11,000++ / night</p>
+                                    <p class="room-features">Twin Beds • Superior Amenities • Garden View</p>
+                                </div>
+                                <div class="room-select-radio">
+                                    <input type="radio" name="room-type" id="superior-twin-room" value="superior-twin">
+                                    <label for="superior-twin-room">Select</label>
+                                </div>
+                            </div>
+                            
+                            <!-- Superior Queen -->
+                            <div class="room-option" data-room="superior-queen">
+                                <img src="images/rooms/superior-queen.jpg" alt="Superior Queen" onerror="this.src='https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=800'">
+                                <div class="room-option-info">
+                                    <h4>Superior Queen</h4>
+                                    <p class="price">BDT 10,000++ / night</p>
+                                    <p class="room-features">Queen Bed • Premium Comfort • Modern Design</p>
+                                </div>
+                                <div class="room-select-radio">
+                                    <input type="radio" name="room-type" id="superior-queen-room" value="superior-queen">
+                                    <label for="superior-queen-room">Select</label>
+                                </div>
+                            </div>
+                            
+                            <!-- Junior Suite -->
+                            <div class="room-option" data-room="junior-suite">
+                                <img src="images/rooms/junior-suite.jpg" alt="Junior Suite" onerror="this.src='https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=800'">
+                                <div class="room-option-info">
+                                    <h4>Junior Suite</h4>
+                                    <p class="price">BDT 18,000++ / night</p>
+                                    <p class="room-features">Spacious • Living Area • Premium Amenities</p>
+                                </div>
+                                <div class="room-select-radio">
+                                    <input type="radio" name="room-type" id="junior-suite-room" value="junior-suite">
+                                    <label for="junior-suite-room">Select</label>
+                                </div>
+                            </div>
+                            
+                            <!-- Premium Cottage -->
+                            <div class="room-option" data-room="premium-cottage">
+                                <img src="images/rooms/premium-cottage.jpg" alt="Premium Cottage" onerror="this.src='https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800'">
+                                <div class="room-option-info">
+                                    <h4>Premium Cottage</h4>
+                                    <p class="price">BDT 13,000++ / night</p>
+                                    <p class="room-features">Private Cottage • Garden View • Exclusive Amenities</p>
+                                </div>
+                                <div class="room-select-radio">
+                                    <input type="radio" name="room-type" id="premium-cottage-room" value="premium-cottage">
+                                    <label for="premium-cottage-room">Select</label>
+                                </div>
+                            </div>
+                            
+                            <!-- Executive Cottage -->
+                            <div class="room-option" data-room="executive-cottage">
+                                <img src="images/rooms/executive-cottage.jpg" alt="Executive Cottage" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=800'">
+                                <div class="room-option-info">
+                                    <h4>Executive Cottage</h4>
+                                    <p class="price">BDT 14,000++ / night</p>
+                                    <p class="room-features">Lake View • Private Terrace • Executive Lounge</p>
+                                </div>
+                                <div class="room-select-radio">
+                                    <input type="radio" name="room-type" id="executive-cottage-room" value="executive-cottage">
+                                    <label for="executive-cottage-room">Select</label>
+                                </div>
+                            </div>
+                            
+                            <!-- Family Cottage -->
+                            <div class="room-option" data-room="family-cottage">
+                                <img src="images/rooms/family-cottage.jpg" alt="Family Cottage" onerror="this.src='https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800'">
+                                <div class="room-option-info">
+                                    <h4>Family Cottage</h4>
+                                    <p class="price">BDT 26,000++ / night</p>
+                                    <p class="room-features">Multiple Bedrooms • Living Area • Family-friendly</p>
+                                </div>
+                                <div class="room-select-radio">
+                                    <input type="radio" name="room-type" id="family-cottage-room" value="family-cottage">
+                                    <label for="family-cottage-room">Select</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="secondary-btn prev-step" data-prev="1">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="primary-btn next-step" data-next="3">
+                            Next: Personal Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Personal Details -->
+                <div class="form-step" id="step-3">
+                    <div class="form-group">
+                        <label for="full-name"><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="full-name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="email" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+880 1XXX-XXXXXX" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="special-requests"><i class="fas fa-star"></i> Special Requests (Optional)</label>
+                        <textarea id="special-requests" placeholder="Any special requirements, dietary needs, or occasion details..." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" checked>
+                            <span>Send me special offers and updates about Kokomo Resort</span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="secondary-btn prev-step" data-prev="2">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="submit" class="primary-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Booking Request
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="booking-assurance">
+                <p><i class="fas fa-shield-alt"></i> <strong>Booking Assurance:</strong> No payment required now. Free cancellation up to 48 hours before check-in.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room Details Modal -->
+    <div id="room-modal" class="modal room-modal">
+        <button onclick="closeAllPopups()" class="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-content">
+            <h2 id="room-title">Room Details</h2>
+            <div id="room-content"></div>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div id="gallery-modal" class="modal gallery-modal">
+        <button onclick="closeGallery()" class="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-content">
+            <div class="gallery-modal-container">
+                <img id="gallery-modal-image" src="" alt="">
+                <div class="gallery-modal-info">
+                    <h3 id="gallery-modal-title"></h3>
+                    <div class="gallery-nav">
+                        <button onclick="prevGalleryImage()" class="gallery-nav-btn">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <span id="gallery-counter">1/7</span>
+                        <button onclick="nextGalleryImage()" class="gallery-nav-btn">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <button onclick="downloadImage()" class="secondary-btn mt-20">
+                        <i class="fas fa-download"></i> Download Image
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content with Low Opacity Header -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <button onclick="openSideMenu()" class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <img src="images/logo/logo.png" alt="Kokomo Resort Logo" onerror="this.src='https://via.placeholder.com/200x60/FF6B35/FFFFFF?text=KOKOMO+RESORT'">
+            </div>
+            <div class="nav-buttons">
+                <button onclick="window.location.href='mailto:reservation.kokomoresort@gmail.com'" class="email-btn">
+                </button>
+                <button onclick="openBooking()" class="book-btn">
+                    <i class="fas fa-calendar-alt"></i> Book Now
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-slider">
+            <div class="slide active">
+                <img src="images/slides/bird.jpg" alt="Resort View">
+            </div>
+            <div class="slide">
+                <img src="images/slides/swimming.jpg" alt="Luxury Pool">
+            </div>
+            <div class="slide">
+                <img src="images/slides/dron.jpg" alt="Nature View">
+            </div>
+            <div class="slide">
+                <img src="images/slides/minizoo.jpg" alt="Nature View">
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1>Kokomo Sunset Resort</h1>
+            <p class="subtitle">Where Nature Meets Luxury</p>
+            <p class="description">Experience unparalleled luxury amidst breathtaking natural beauty</p>
+            <div class="hero-buttons">
+                <button onclick="openBooking()" class="primary-btn">
+                    <i class="fas fa-calendar-star"></i> Book Experience
+                </button>
+                <button onclick="scrollToSection('rooms')" class="secondary-btn">
+                    <i class="fas fa-eye"></i> View Rooms
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section with Correct Tariff -->
+    <section id="rooms" class="section">
+        <div class="container">
+            <h2 class="section-title">Luxury Accommodations</h2>
+            <div class="rooms-grid">
+                <!-- Deluxe Couple -->
+                <div class="room-card">
+                    <img src="images/rooms/deluxe_room.JPG" alt="Deluxe Couple">
+                    <div class="room-info">
+                        <h3>Deluxe Couple</h3>
+                        <p class="price">BDT 10,000++ / night</p>
+                        <p class="description">Perfect for couples with comfortable amenities and romantic setting</p>
+                        <button onclick="showRoomDetails('deluxe-couple')" class="view-btn">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Superior Twin -->
+                <div class="room-card">
+                    <img src="images/rooms/twin_bed.jpeg" alt="Superior Twin">
+                    <div class="room-info">
+                        <h3>Superior Twin</h3>
+                        <p class="price">BDT 11,000++ / night</p>
+                        <p class="description">Twin beds with superior amenities and garden view</p>
+                        <button onclick="showRoomDetails('superior-twin')" class="view-btn">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Superior Queen -->
+                <div class="room-card">
+                    <img src="images/rooms/queen_bed.jpeg" alt="Superior Queen">
+                    <div class="room-info">
+                        <h3>Superior Queen</h3>
+                        <p class="price">BDT 10,000++ / night</p>
+                        <p class="description">Queen size bed with premium comfort and modern design</p>
+                        <button onclick="showRoomDetails('superior-queen')" class="view-btn">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Junior Suite -->
+                <div class="room-card">
+                    <img src="images/rooms/junior_suite.JPG" alt="Junior Suite">
+                    <div class="room-info">
+                        <h3>Junior Suite</h3>
+                        <p class="price">BDT 18,000++ / night</p>
+                        <p class="description">Spacious suite with separate living area and premium amenities</p>
+                        <button onclick="showRoomDetails('junior-suite')" class="view-btn">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Premium Cottage -->
+                <div class="room-card">
+                    <img src="images/rooms/permium_cottage.jpg" alt="Premium Cottage">
+                    <div class="room-info">
+                        <h3>Premium Cottage</h3>
+                        <p class="price">BDT 13,000++ / night</p>
+                        <p class="description">Private cottage with garden view and exclusive amenities</p>
+                        <button onclick="showRoomDetails('premium-cottage')" class="view-btn">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Executive Cottage -->
+                <div class="room-card">
+                    <img src="images/rooms/executive_cottage.jpeg" alt="Executive Cottage">
+                    <div class="room-info">
+                        <h3>Executive Cottage</h3>
+                        <p class="price">BDT 14,000++ / night</p>
+                        <p class="description">Private cottage with lake view, room service, and executive lounge access</p>
+                        <button onclick="showRoomDetails('executive-cottage')" class="view-btn">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Family Cottage -->
+                <div class="room-card">
+                    <img src="images/rooms/family_cottage.jpg" alt="Family Cottage">
+                    <div class="room-info">
+                        <h3>Family Cottage</h3>
+                        <p class="price">BDT 26,000++ / night</p>
+                        <p class="description">Perfect for families with multiple bedrooms and spacious living area</p>
+                        <button onclick="showRoomDetails('family-cottage')" class="view-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tariff Information Note -->
+            <div class="tariff-note">
+                <p><i class="fas fa-info-circle"></i> <strong>Tariff Information:</strong> All prices are subject to 10% service charge & 15% VAT. Check-in: 02:00 PM | Check-out: 12:00 PM. All major cards accepted.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Resort Activities</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Swimming Pool</h3>
+                    <p>Temperature-controlled pool with swim-up bar</p>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Boating</h3>
+                    <p>Guided boat tours on our private lake</p>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Gym & Fitness</h3>
+                    <p>State-of-the-art fitness center</p>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Spa Services</h3>
+                    <p>Relaxing treatments and wellness therapies</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining Section -->
+    <section id="dining" class="section">
+        <div class="container">
+            <h2 class="section-title">Dining Experience</h2>
+            <div class="dining-content">
+                <div class="dining-text">
+                    <h3>Sunset Dining Experience</h3>
+                    <p>Savor world-class cuisine under the stars at our fine dining restaurant</p>
+                    <button onclick="showMenu()" class="primary-btn">
+                        <i class="fas fa-utensils"></i> View Menu
+                    </button>
+                </div>
+                <div class="dining-image">
+                    <img src="images/dinne/restaruant.jpg" alt="Fine Dining" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cafe Section -->
+    <section id="cafe" class="section bg-accent-light">
+        <div class="container">
+            <h2 class="section-title">Cafe Kokomo</h2>
+            <div class="cafe-content">
+                <div class="cafe-image">
+                    <img src="images/dinne/cafe_kokomo.jpg" alt="Cafe Interior" onerror="this.src='https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=600'">
+                </div>
+                <div class="cafe-text">
+                    <h3>Artisanal Coffee & Pastries</h3>
+                    <p>Our lobby café serves premium coffee, fresh pastries, and light snacks</p>
+                    <ul class="cafe-features">
+                        <li><i class="fas fa-check"></i> Kokomo Sunrise Coffee</li>
+                        <li><i class="fas fa-check"></i> Tropical Smoothies</li>
+                        <li><i class="fas fa-check"></i> Homemade Pastries</li>
+                        <li><i class="fas fa-check"></i> Live Music on Weekends</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="section">
+        <div class="container">
+            <h2 class="section-title">Resort Amenities</h2>
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <i class="fas fa-wifi"></i>
+                    <h3>Free WiFi</h3>
+                    <p>High-speed internet throughout the resort</p>
+                </div>
+                <div class="amenity-card">
+                    <i class="fas fa-car"></i>
+                    <h3>Free Parking</h3>
+                    <p>Secure parking available for all guests</p>
+                </div>
+                <div class="amenity-card">
+                    <i class="fas fa-swimming-pool"></i>
+                    <h3>Swimming Pool</h3>
+                    <p>Infinity pool with panoramic views</p>
+                </div>
+                <div class="amenity-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Restaurant</h3>
+                    <p>Fine dining with international cuisine</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Gallery Section -->
+    <section id="gallery" class="section bg-dark">
+        <div class="container">
+            <h2 class="section-title text-light">Resort Gallery</h2>
+            <p class="text-center text-light mb-40">Click on any image to view full size</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openGalleryImage('images/gallery/gallery1.jpg', 'Luxury Suite')">
+                    <img src="images/gallery/kokomo (2).jpg" alt="Luxury Suite" onerror="this.src='https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=800'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openGalleryImage('images/gallery/gallery2.jpg', 'Infinity Pool')">
+                    <img src="images/gallery/kokomo (3).JPG" alt="Pool Area" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openGalleryImage('images/gallery/gallery3.jpg', 'Spa Retreat')">
+                    <img src="images/gallery/kokomo (5).jpg" alt="Spa Retreat" onerror="this.src='https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=800'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openGalleryImage('images/gallery/gallery4.jpg', 'Fitness Center')">
+                    <img src="images/gallery/kokomo (6).jpg" alt="Fitness Center" onerror="this.src='https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=800'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openGalleryImage('images/rooms/deluxe-couple.jpg', 'Deluxe Couple')">
+                    <img src="images/gallery/kokomo (8).jpg" alt="Deluxe Couple" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=800'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openGalleryImage('images/rooms/premium-cottage.jpg', 'Premium Cottage')">
+                    <img src="images/gallery/kokomo (9).jpg" alt="Premium Cottage" onerror="this.src='https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openGalleryImage('images/dining/restaurant.jpg', 'Fine Dining Restaurant')">
+                    <img src="images/gallery/kokomo (10).jpg" alt="Restaurant" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openGalleryImage('images/activities/pool.jpg', 'Swimming Pool')">
+                    <img src="images/gallery/kokomo (11).jpg" alt="Swimming Pool" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Location Section with Booking Email -->
+    <section id="location" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Location</h2>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Kokomo Sunset Resort</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Resort Address:</strong> Pabur Road, Surjanarayanpur, Beside ACI Motors, Kapasia, Gazipur</p>
+                    <p><i class="fas fa-location-dot"></i> <strong>Area:</strong> Kapashia, Rajendrapur, Gazipur - 47 kilometers from Dhaka</p>
+                    <p><i class="fas fa-phone"></i> <strong>Resort Phone:</strong> +880 1894 953 780, 81, 82, 84</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Booking Email:</strong> reservation.kokomoresort@gmail.com</p>
+                    
+                    <div class="dhaka-office">
+                        <h4><i class="fas fa-building"></i> Dhaka Office</h4>
+                        <p>Flat No: 6B, House No: 93/3, Road No: 08, Block: C Niketon, Gulsha-1, Dhaka-1212</p>
+                    </div>
+                    
+                    <div class="timing-info">
+                        <p><i class="fas fa-clock"></i> <strong>Check-in:</strong> 02:00 PM | <strong>Check-out:</strong> 12:00 PM</p>
+                        <p><i class="fas fa-credit-card"></i> <strong>Payment:</strong> All major cards accepted</p>
+                    </div>
+                    
+                    <button onclick="openMaps()" class="primary-btn">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </button>
+                </div>
+                <div class="location-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3641.801646702206!2d90.51326581105992!3d24.09095687834571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3756d7781bc8ba4f%3A0xf050ff301e6e51d8!2sKokomo%20Sunset%20Resort!5e0!3m2!1sen!2sbd!4v1715848000000!5m2!1sen!2sbd" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Reviews Section -->
+    <section id="reviews" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Guest Reviews</h2>
+            <p class="text-center mb-40">See what our guests say about their experience</p>
+            
+            <!-- Review Stats -->
+            <div class="review-stats">
+                <div class="stat-card">
+                    <div class="stat-number">4.8</div>
+                    <div class="stat-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>Overall Rating</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">94%</div>
+                    <p>Would Recommend</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">247+</div>
+                    <p>Happy Guests</p>
+                </div>
+            </div>
+            
+            <!-- Existing Reviews -->
+            <div class="reviews-grid" id="reviews-container">
+                <!-- Reviews loaded by JavaScript -->
+            </div>
+            
+            <!-- Write Review Form -->
+            <div class="review-form-container" id="review-form-container">
+                <h3>Share Your Experience</h3>
+                <form id="review-form" onsubmit="submitReview(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="review-name">Your Name</label>
+                            <input type="text" id="review-name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-email">Email Address</label>
+                            <input type="email" id="review-email" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="review-stay-date">Date of Stay</label>
+                        <input type="month" id="review-stay-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Your Rating</label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="review-title">Review Title</label>
+                        <input type="text" id="review-title" placeholder="Summarize your experience" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="review-text">Your Review</label>
+                        <textarea id="review-text" placeholder="Share details of your experience at Kokomo Sunset Resort..." rows="5" required></textarea>
+                        <div class="char-count">Minimum 50 characters</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="review-consent" required>
+                            <span>I confirm this review is based on my genuine experience at Kokomo Sunset Resort</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="primary-btn" id="submit-review-btn">
+                        <i class="fas fa-paper-plane"></i> Submit Review
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Review Guidelines -->
+            <div class="review-guidelines">
+                <h4><i class="fas fa-info-circle"></i> Review Guidelines</h4>
+                <ul>
+                    <li>Please share your genuine experience</li>
+                    <li>Be specific about what you liked or didn't like</li>
+                    <li>No personal information or offensive language</li>
+                    <li>Reviews are typically posted within 24-48 hours</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Contact Section with Booking Email -->
+    <section id="contact" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>We're here to help you create unforgettable memories</p>
+                    <div class="contact-details">
+                        <p><i class="fas fa-phone"></i> +880 1894 953 780, 81, 82, 84</p>
+                        <p><i class="fas fa-envelope"></i> reservation.kokomoresort@gmail.com</p>
+                        <p><i class="fas fa-clock"></i> 24/7 Customer Support</p>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="submitContactForm(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="text" placeholder="Subject" required>
+                    <textarea placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit" class="primary-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Footer with Booking Email -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>KOKOMO SUNSET RESORT</h3>
+                    <p>Luxury, Nature & Memories</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#rooms">Rooms</a>
+                    <a href="#activities">Activities</a>
+                    <a href="#reviews">Reviews</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Kokomo Sunset Resort. All rights reserved.</p>
+                <p class="footer-email">📧 reservation.kokomoresort@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

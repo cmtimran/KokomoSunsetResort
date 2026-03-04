@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    :root {
+        --primary: 255 87 34;
+        /* #FF5722 - Sunset Orange */
+        --primary-foreground: 255 255 255;
+
+        --secondary: 255 193 7;
+        /* #FFC107 - Amber Gold */
+        --secondary-foreground: 55 71 79;
+
+        --accent: 46 125 50;
+        /* #2E7D32 - Lush Green */
+        --accent-foreground: 255 255 255;
+
+        --background: 255 255 255;
+        --foreground: 55 71 79;
+
+        --card: 255 255 255;
+        --card-foreground: 55 71 79;
+
+        --muted: 244 245 247;
+        --muted-foreground: 120 144 156;
+
+        --radius: 1.5rem;
+    }
+
+    /* Theme Architecture: Ultra-Premium & Vibrant Palettes */
+    /* Theme Architecture: Ultra-Premium & High Contrast Palettes */
+    [data-theme='sunset'] {
+        --primary: 255 107 53;
+        --secondary: 255 171 0;
+        --accent: 255 61 0;
+        --background: 255 255 255;
+        --foreground: 33 46 54;
+        --card: 255 255 255;
+        --card-foreground: 33 46 54;
+        --muted: 244 245 247;
+        --muted-foreground: 120 144 156;
+    }
+
+    [data-theme='amber'] {
+        --primary: 230 140 0;
+        --secondary: 255 193 7;
+        --accent: 191 144 0;
+        --background: 255 253 245;
+        --foreground: 62 39 35;
+        --card: 255 255 255;
+        --card-foreground: 62 39 35;
+        --muted: 247 241 228;
+        --muted-foreground: 141 110 99;
+    }
+
+    [data-theme='blue'] {
+        --primary: 13 71 161;
+        --secondary: 30 136 229;
+        --accent: 0 184 212;
+        --background: 250 252 255;
+        --foreground: 13 31 56;
+        --card: 255 255 255;
+        --card-foreground: 13 31 56;
+        --muted: 232 240 254;
+        --muted-foreground: 100 116 139;
+    }
+
+    [data-theme='corporate'] {
+        --primary: 38 50 56;
+        --secondary: 84 110 122;
+        --accent: 16 32 39;
+        --background: 255 255 255;
+        --foreground: 16 32 39;
+        --card: 255 255 255;
+        --card-foreground: 16 32 39;
+        --muted: 241 245 249;
+        --muted-foreground: 100 116 139;
+    }
+
+    [data-theme='forest'] {
+        --primary: 27 94 32;
+        --secondary: 104 159 56;
+        --accent: 51 105 30;
+        --background: 250 255 250;
+        --foreground: 27 44 27;
+        --card: 255 255 255;
+        --card-foreground: 27 44 27;
+        --muted: 236 245 236;
+        --muted-foreground: 101 121 101;
+    }
+
+    .dark {
+        --background: 15 23 42;
+        --foreground: 248 250 252;
+        --card: 30 41 59;
+        --card-foreground: 248 250 252;
+        --muted: 30 41 59;
+        --muted-foreground: 148 163 184;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: rgb(var(--background));
+        color: rgb(var(--foreground));
+        @apply antialiased;
+    }
+}
+
+@layer utilities {
+    .font-heading {
+        font-family: var(--font-playfair), serif;
+    }
+
+    .font-sans {
+        font-family: var(--font-montserrat), sans-serif;
+    }
+
+    .glass {
+        @apply bg-white/70 dark:bg-black/60 backdrop-blur-md border border-white/30 dark:border-white/10;
+    }
+
+    .glass-dark {
+        @apply bg-black/60 dark:bg-black/80 backdrop-blur-xl border border-white/10 dark:border-white/5;
+    }
+
+    .text-gradient {
+        @apply bg-clip-text text-transparent;
+        background-image: linear-gradient(to right, rgb(var(--primary)), rgb(var(--secondary)));
+    }
+}
