@@ -1,13 +1,19 @@
 'use client'
 
 import { useState } from 'react'
-import { Star, Quote, Send, User, MessageSquare, Heart, Sparkles, X, CheckCircle2 } from 'lucide-react'
+import { Star, Quote, Send, User, MessageSquare, Heart, Sparkles, X, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react'
+import Slider from 'react-slick'
+
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const initialTestimonials = [
     {
         id: 1,
         name: 'Sarah Rahman',
         role: 'Honeymoon Couple',
+        source: 'Google',
         content: 'Our stay at Kokomo was absolutely magical. The sunset terrace views are something out of a dream. The service was impeccable, making our honeymoon truly unforgettable.',
         rating: 5,
         avatar: '/images/avatars/user1.jpg'
@@ -16,6 +22,7 @@ const initialTestimonials = [
         id: 2,
         name: 'James Wilson',
         role: 'Solo Adventurer',
+        source: 'TripAdvisor',
         content: 'A perfect sanctuary for a digital detox. The tranquil energy of the Kapasia lakes combined with the luxury of the cottages provided the reset I desperately needed.',
         rating: 5,
         avatar: '/images/avatars/user2.jpg'
@@ -24,11 +31,54 @@ const initialTestimonials = [
         id: 3,
         name: 'The Chowdhury Family',
         role: 'Family Vacation',
+        source: 'Google',
         content: 'The kids loved the pool and the boating! It is rare to find a place that offers both high-end luxury for adults and such engaging activities for children.',
         rating: 5,
         avatar: '/images/avatars/user3.jpg'
+    },
+    {
+        id: 4,
+        name: 'Anika & Rashed',
+        role: 'Anniversary Celebration',
+        source: 'TripAdvisor',
+        content: 'Breathtaking architecture and incredibly attentive staff. They surprised us with a custom cake for our anniversary. We will definitely be coming back next year!',
+        rating: 5,
+        avatar: '/images/avatars/user1.jpg'
+    },
+    {
+        id: 5,
+        name: 'David Chen',
+        role: 'Corporate Retreat',
+        source: 'Google',
+        content: 'We hosted our annual corporate retreat here. The conference facilities were top-notch, and the evening BBQ by the lake was exactly what the team needed.',
+        rating: 4,
+        avatar: '/images/avatars/user2.jpg'
     }
 ]
+
+const NextArrow = (props: any) => {
+    const { onClick } = props;
+    return (
+        <button
+            onClick={onClick}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-card rounded-full shadow-xl flex items-center justify-center border border-muted hover:border-primary hover:text-primary transition-colors focus:outline-none"
+        >
+            <ChevronRight size={24} />
+        </button>
+    );
+};
+
+const PrevArrow = (props: any) => {
+    const { onClick } = props;
+    return (
+        <button
+            onClick={onClick}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-card rounded-full shadow-xl flex items-center justify-center border border-muted hover:border-primary hover:text-primary transition-colors focus:outline-none"
+        >
+            <ChevronLeft size={24} />
+        </button>
+    );
+};
 
 export default function Feedback() {
     const [isFormOpen, setIsFormOpen] = useState(false)
@@ -43,6 +93,34 @@ export default function Feedback() {
             setSubmitted(false)
         }, 3000)
     }
+
+    const sliderSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        pauseOnHover: true,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                    arrows: false
+                }
+            }
+        ]
+    };
 
     return (
         <section className="py-32 bg-muted/10 relative overflow-hidden">
@@ -66,34 +144,46 @@ export default function Feedback() {
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {initialTestimonials.map((testimonial) => (
-                        <div key={testimonial.id} className="group glass p-12 rounded-[3.5rem] border border-white/40 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 relative overflow-hidden">
-                            <Quote className="absolute top-8 right-8 text-primary/10 w-20 h-20 -z-10 group-hover:text-primary/20 transition-colors" />
+                <div className="relative px-4">
+                    <Slider {...sliderSettings} className="review-slider">
+                        {initialTestimonials.map((testimonial) => (
+                            <div key={testimonial.id} className="p-4 outline-none">
+                                <div className="group glass p-10 lg:p-12 rounded-[3.5rem] border border-white/40 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 relative overflow-hidden h-full flex flex-col justify-between min-h-[420px]">
+                                    <Quote className="absolute top-8 right-8 text-primary/10 w-20 h-20 -z-10 group-hover:text-primary/20 transition-colors" />
 
-                            <div className="flex gap-1 mb-8">
-                                {[...Array(testimonial.rating)].map((_, i) => (
-                                    <Star key={i} size={14} className="fill-primary text-primary" />
-                                ))}
-                            </div>
+                                    <div>
+                                        <div className="flex items-center justify-between mb-8">
+                                            <div className="flex gap-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <Star key={i} size={14} className={i < testimonial.rating ? "fill-primary text-primary" : "text-muted-foreground/30"} />
+                                                ))}
+                                            </div>
+                                            <div className="flex items-center gap-1.5 px-3 py-1 bg-muted rounded-full">
+                                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                                                <span className="text-[9px] uppercase font-bold tracking-widest text-muted-foreground">
+                                                    {testimonial.source}
+                                                </span>
+                                            </div>
+                                        </div>
 
-                            <p className="text-lg text-muted-foreground font-light leading-relaxed italic mb-10">
-                                &ldquo;{testimonial.content}&rdquo;
-                            </p>
+                                        <p className="text-lg text-muted-foreground font-light leading-relaxed italic mb-10 line-clamp-4">
+                                            &ldquo;{testimonial.content}&rdquo;
+                                        </p>
+                                    </div>
 
-                            <div className="flex items-center gap-5">
-                                <div className="w-14 h-14 rounded-2xl bg-muted overflow-hidden border border-muted-foreground/10 p-1">
-                                    <div className="w-full h-full rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                                        <User size={24} />
+                                    <div className="flex items-center gap-5 mt-auto">
+                                        <div className="w-14 h-14 rounded-full bg-muted overflow-hidden shadow-md flex-shrink-0 flex items-center justify-center">
+                                            <User size={24} className="text-muted-foreground/50" />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <h4 className="font-bold text-foreground leading-none">{testimonial.name}</h4>
+                                            <p className="text-[10px] uppercase font-bold tracking-widest text-primary leading-none">{testimonial.role}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="space-y-1">
-                                    <h4 className="font-bold text-foreground leading-none">{testimonial.name}</h4>
-                                    <p className="text-[10px] uppercase font-bold tracking-widest text-primary leading-none">{testimonial.role}</p>
-                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </Slider>
                 </div>
 
                 {/* Exclusive Benefit Banner */}
@@ -116,7 +206,7 @@ export default function Feedback() {
             {isFormOpen && (
                 <div className="fixed inset-0 z-[1000] bg-black/90 flex items-center justify-center p-4 backdrop-blur-2xl animate-in fade-in duration-300">
                     <div
-                        className="bg-card w-full max-w-2xl rounded-[3.5rem] border border-white/20 shadow-2xl overflow-hidden relative p-12"
+                        className="bg-card w-full max-w-2xl rounded-[3.5rem] border border-white/20 shadow-2xl overflow-y-auto max-h-[90vh] relative p-12 custom-scrollbar"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button

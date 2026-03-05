@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Menu, X, Gift } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const NAV_LINKS = [
     { name: 'Home', href: '/' },
@@ -16,6 +17,9 @@ const NAV_LINKS = [
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
+    const pathname = usePathname()
+
+    const isActive = (href: string) => pathname === href
 
     return (
         <>
@@ -26,7 +30,7 @@ export default function Navbar() {
                             <img
                                 src="/images/logo/logo.png"
                                 alt="Kokomo Sunset Resort Logo"
-                                className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105 dark:brightness-0 dark:invert"
+                                className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105"
                             />
                         </Link>
                     </div>
@@ -36,7 +40,8 @@ export default function Navbar() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-foreground font-semibold hover:text-primary hover:-translate-y-0.5 transition-all text-[10px] tracking-[0.2em] uppercase"
+                                className={`font-semibold hover:text-primary hover:-translate-y-0.5 transition-all text-[10px] tracking-[0.2em] uppercase ${isActive(link.href) ? 'text-primary' : 'text-foreground'
+                                    }`}
                             >
                                 {link.name}
                             </Link>
@@ -45,7 +50,8 @@ export default function Navbar() {
                         {/* Special Offers Page Link */}
                         <Link
                             href="/offers"
-                            className="relative flex items-center gap-2 text-foreground font-bold hover:text-primary transition-all text-[10px] tracking-[0.2em] uppercase group"
+                            className={`relative flex items-center gap-2 font-bold hover:text-primary transition-all text-[10px] tracking-[0.2em] uppercase group ${isActive('/offers') ? 'text-primary' : 'text-foreground'
+                                }`}
                         >
                             <Gift size={14} className="group-hover:animate-bounce" />
                             Offers

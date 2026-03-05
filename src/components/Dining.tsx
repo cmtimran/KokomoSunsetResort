@@ -1,18 +1,21 @@
 'use client'
 
-import { Coffee, Utensils, Star, ArrowRight } from 'lucide-react'
+import { useState } from 'react'
+import { Coffee, Utensils, Star, ArrowRight, X, FileText } from 'lucide-react'
 
 export default function Dining({ showHeading = true }: { showHeading?: boolean }) {
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+
     return (
-        <section id="dining" className="py-32 bg-muted/20 relative overflow-hidden">
+        <section id="dining" className="py-20 md:py-32 bg-muted/20 relative overflow-hidden">
             {/* Background artistic element */}
             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[100px] -z-10" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {showHeading && (
-                    <div className="text-center mb-24 space-y-4">
+                    <div className="text-center mb-12 md:mb-24 space-y-4">
                         <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">A Culinary Journey</span>
-                        <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground">Flavors of Kokomo</h2>
+                        <h2 className="text-4xl md:text-6xl font-heading font-bold text-foreground">Flavors of Kokomo</h2>
                         <div className="h-1.5 w-24 bg-sunset-gradient mx-auto rounded-full" />
                         <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
                             From sunrise artisanal brews to gourmet candlelit dinners, discover a world of exquisite tastes at our signature dining venues.
@@ -20,12 +23,12 @@ export default function Dining({ showHeading = true }: { showHeading?: boolean }
                     </div>
                 )}
 
-                <div className="space-y-32">
+                <div className="space-y-16 md:space-y-32">
                     {/* Fine Dining Section */}
                     <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
                         <div className="lg:w-1/2 order-2 lg:order-1 relative group">
                             <div className="absolute -inset-4 bg-primary/10 rounded-[3rem] blur-2xl group-hover:bg-primary/20 transition-all duration-700 -z-10" />
-                            <div className="h-[500px] rounded-[3rem] overflow-hidden shadow-2xl">
+                            <div className="h-80 sm:h-[500px] rounded-[3rem] overflow-hidden shadow-2xl">
                                 <img
                                     src="/images/dinne/restaruant.jpg"
                                     alt="Fine Dining Experience"
@@ -45,7 +48,7 @@ export default function Dining({ showHeading = true }: { showHeading?: boolean }
                             <div className="p-4 bg-primary/10 text-primary rounded-2xl inline-block">
                                 <Utensils size={32} />
                             </div>
-                            <h3 className="text-4xl md:text-5xl font-heading font-bold text-foreground leading-tight">Sunset Dining Terrace</h3>
+                            <h3 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground leading-tight">Sunset Dining Terrace</h3>
                             <p className="text-lg text-muted-foreground leading-relaxed font-light">
                                 Authentically curated dishes that blend local heritage with global finesse. Savor our signature seafood platters while the sky transforms into a canvas of amber and orange.
                             </p>
@@ -59,7 +62,10 @@ export default function Dining({ showHeading = true }: { showHeading?: boolean }
                                     <span className="text-sm font-bold uppercase tracking-widest text-foreground/80">Premium Culinary Experience</span>
                                 </div>
                             </div>
-                            <button className="flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-full font-bold uppercase tracking-[0.2em] text-[10px] group transition-all shadow-xl hover:shadow-primary/30 active:scale-95 bg-sunset-gradient">
+                            <button
+                                onClick={() => setIsMenuOpen(true)}
+                                className="flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-full font-bold uppercase tracking-[0.2em] text-[10px] group transition-all shadow-xl hover:shadow-primary/30 active:scale-95 bg-sunset-gradient"
+                            >
                                 Explore The Menu <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                             </button>
                         </div>
@@ -71,7 +77,7 @@ export default function Dining({ showHeading = true }: { showHeading?: boolean }
                             <div className="p-4 bg-primary/10 text-primary rounded-2xl inline-block">
                                 <Coffee size={32} />
                             </div>
-                            <h3 className="text-4xl md:text-5xl font-heading font-bold text-foreground leading-tight">Cafe Kokomo</h3>
+                            <h3 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground leading-tight">Cafe Kokomo</h3>
                             <p className="text-lg text-muted-foreground leading-relaxed font-light">
                                 Our boutique lobby lounge offering artisanal coffee, freshly-baked pastries, and a tranquil atmosphere perfect for light reading or intimate conversations.
                             </p>
@@ -92,7 +98,7 @@ export default function Dining({ showHeading = true }: { showHeading?: boolean }
                         </div>
                         <div className="lg:w-1/2 relative group">
                             <div className="absolute -inset-4 bg-primary/10 rounded-[3rem] blur-2xl group-hover:bg-primary/20 transition-all duration-700 -z-10" />
-                            <div className="h-[500px] rounded-[3rem] overflow-hidden shadow-2xl">
+                            <div className="h-80 sm:h-[500px] rounded-[3rem] overflow-hidden shadow-2xl">
                                 <img
                                     src="/images/dinne/cafe_kokomo.jpg"
                                     alt="Cafe Kokomo Lounge"
@@ -104,6 +110,43 @@ export default function Dining({ showHeading = true }: { showHeading?: boolean }
                     </div>
                 </div>
             </div>
+
+            {/* Menu PDF Modal */}
+            {isMenuOpen && (
+                <div className="fixed inset-0 z-[100000] bg-black/90 flex items-center justify-center p-4 backdrop-blur-md animate-in fade-in duration-300">
+                    <div className="bg-card w-full max-w-5xl h-[90vh] rounded-[2.5rem] shadow-2xl border border-white/20 animate-in zoom-in duration-500 overflow-hidden flex flex-col relative">
+                        {/* Modal Header */}
+                        <div className="flex justify-between items-center p-6 border-b border-white/10 glass-dark">
+                            <div className="flex items-center gap-3 text-white">
+                                <FileText className="text-primary" size={24} />
+                                <h3 className="font-heading font-bold text-2xl">Kokomo Selected Menu</h3>
+                            </div>
+                            <button
+                                onClick={() => setIsMenuOpen(false)}
+                                className="p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors active:scale-95"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        {/* Modal Body - PDF Viewer */}
+                        <div className="flex-1 w-full h-full bg-white/5 relative">
+                            {/* We use an iframe to display the PDF. Assuming public/menu.pdf exists */}
+                            <iframe
+                                src="/menu.pdf"
+                                className="w-full h-full border-none"
+                                title="Restaurant Menu"
+                            />
+
+                            {/* Fallback overlay in case PDF is not yet uploaded to public folder */}
+                            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-50">
+                                <span className="text-white/30 text-xs font-bold uppercase tracking-widest mb-2">Displaying</span>
+                                <span className="text-white/20 font-heading text-4xl font-bold">Menu.pdf</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     )
 }

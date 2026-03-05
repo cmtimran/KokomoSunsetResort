@@ -8,6 +8,11 @@ import { rooms } from '@/data/rooms'
 export default function Booking() {
     const searchParams = useSearchParams();
     const roomParam = searchParams.get('room');
+    const packageParam = searchParams.get('package');
+    const offerParam = searchParams.get('offer');
+
+    const isSpecialBooking = !!(packageParam || offerParam);
+    const specialTitle = packageParam || offerParam;
 
     const [step, setStep] = useState(1);
     const [selectedRoom, setSelectedRoom] = useState<number | string | null>(roomParam ? parseInt(roomParam) : null);
@@ -41,12 +46,14 @@ export default function Booking() {
 
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16 space-y-4">
-                    <span className="text-primary font-bold tracking-[0.4em] uppercase text-[10px] block animate-slideUp">Reserve Your Stay</span>
-                    <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground animate-fadeIn">
-                        Book <span className="text-gradient">Now</span>
+                    <span className="text-primary font-bold tracking-[0.4em] uppercase text-[10px] block animate-slideUp">
+                        {isSpecialBooking ? (packageParam ? 'Secure Your Package' : 'Claim Your Offer') : 'Reserve Your Stay'}
+                    </span>
+                    <h2 className="text-4xl md:text-6xl font-heading font-bold text-foreground animate-fadeIn">
+                        {isSpecialBooking ? <span className="text-gradient">{specialTitle}</span> : <>Book <span className="text-gradient">Now</span></>}
                     </h2>
                     <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-xl mx-auto">
-                        Secure your sanctuary at Kokomo Sunset Resort. Choose your dates, select a premium room, and leave the rest to us.
+                        {isSpecialBooking ? 'Select your dates and provide your details to secure this exclusive experience.' : 'Secure your sanctuary at Kokomo Sunset Resort. Choose your dates, select a premium room, and leave the rest to us.'}
                     </p>
                 </div>
 
@@ -56,16 +63,16 @@ export default function Booking() {
                     {/* Progress Steps */}
                     <div className="flex justify-between items-center mb-12 relative border-b border-muted pb-8">
                         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-muted -z-10 rounded-full hidden sm:block">
-                            <div className="h-full bg-primary transition-all duration-500 rounded-full" style={{ width: step === 1 ? '33%' : step === 2 ? '66%' : '100%' }} />
+                            <div className="h-full bg-primary transition-all duration-500 rounded-full" style={{ width: step === 1 ? (isSpecialBooking ? '50%' : '33%') : step === 2 ? '66%' : '100%' }} />
                         </div>
 
-                        {['Dates', 'Room', 'Details'].map((label, idx) => {
-                            const stepNum = idx + 1;
+                        {(isSpecialBooking ? ['Dates', 'Details'] : ['Dates', 'Room', 'Details']).map((label, idx) => {
+                            const stepNum = isSpecialBooking ? (idx === 1 ? 3 : 1) : idx + 1;
                             const isActive = step >= stepNum;
                             return (
                                 <div key={label} className="flex flex-col items-center gap-3 bg-card px-4">
                                     <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${isActive ? 'bg-primary text-white shadow-lg shadow-primary/30' : 'bg-muted text-muted-foreground'}`}>
-                                        {step > stepNum ? <Check size={18} /> : stepNum}
+                                        {step > stepNum ? <Check size={18} /> : (idx + 1)}
                                     </div>
                                     <span className={`text-[10px] uppercase font-bold tracking-widest ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>{label}</span>
                                 </div>
@@ -140,11 +147,11 @@ export default function Booking() {
                                 <div className="flex justify-end pt-6">
                                     <button
                                         type="button"
-                                        onClick={() => setStep(2)}
+                                        onClick={() => setStep(isSpecialBooking ? 3 : 2)}
                                         disabled={!checkIn || !checkOut}
                                         className="px-10 py-4 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[11px] transition-all shadow-xl shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-orange-500 disabled:hover:bg-primary"
                                     >
-                                        Continue to Rooms
+                                        {isSpecialBooking ? 'Continue to Details' : 'Continue to Rooms'}
                                     </button>
                                 </div>
                             </div>
@@ -236,7 +243,7 @@ export default function Booking() {
                                 </div>
 
                                 <div className="flex justify-between items-center pt-6">
-                                    <button type="button" onClick={() => setStep(2)} className="px-8 py-4 text-muted-foreground hover:text-foreground font-bold uppercase tracking-widest text-[11px] transition-colors">
+                                    <button type="button" onClick={() => setStep(isSpecialBooking ? 1 : 2)} className="px-8 py-4 text-muted-foreground hover:text-foreground font-bold uppercase tracking-widest text-[11px] transition-colors">
                                         Back
                                     </button>
                                     <button type="submit" className="px-10 py-4 bg-sunset-gradient text-white rounded-full font-bold uppercase tracking-widest text-[11px] shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">

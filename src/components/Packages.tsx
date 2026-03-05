@@ -30,15 +30,15 @@ const packages = [
 
 export default function Packages({ showHeading = true }: { showHeading?: boolean }) {
     return (
-        <section id="packages" className="py-32 bg-background relative overflow-hidden">
+        <section id="packages" className="py-20 md:py-32 bg-background relative overflow-hidden">
             {/* Background artistic element */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/[0.02] rounded-full blur-[120px] -z-10" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {showHeading && (
-                    <div className="text-center mb-24 space-y-4">
+                    <div className="text-center mb-12 md:mb-24 space-y-4">
                         <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">Curated Journeys</span>
-                        <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground">Special Experiences</h2>
+                        <h2 className="text-4xl md:text-6xl font-heading font-bold text-foreground">Special Experiences</h2>
                         <div className="h-1.5 w-24 bg-sunset-gradient mx-auto rounded-full" />
                         <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
                             Tailored escapes designed to immerse you in the extraordinary beauty and tranquility of Kokomo Sunset.
@@ -50,8 +50,8 @@ export default function Packages({ showHeading = true }: { showHeading?: boolean
                     {packages.map((pkg) => {
                         const Icon = pkg.icon
                         return (
-                            <div key={pkg.name} className={`group relative p-12 rounded-[3.5rem] transition-all duration-700 ${pkg.featured
-                                ? 'bg-charcoal text-white shadow-[0_30px_100px_-20px_rgba(var(--primary),0.3)] scale-105 z-10 border border-white/10'
+                            <div key={pkg.name} className={`group relative p-8 sm:p-12 rounded-[2.5rem] sm:rounded-[3.5rem] transition-all duration-700 ${pkg.featured
+                                ? 'bg-charcoal text-white shadow-[0_30px_100px_-20px_rgba(var(--primary),0.3)] md:scale-105 z-10 border border-white/10'
                                 : 'bg-card text-foreground hover:shadow-2xl border border-muted hover:border-primary/20 hover:scale-102'
                                 }`}>
                                 {pkg.featured && (
@@ -64,14 +64,14 @@ export default function Packages({ showHeading = true }: { showHeading?: boolean
                                     <Icon size={36} strokeWidth={1.5} />
                                 </div>
 
-                                <h3 className={`text-3xl font-heading font-bold mb-3 tracking-tight ${pkg.featured ? 'text-white' : 'text-foreground'}`}>{pkg.name}</h3>
+                                <h3 className={`text-2xl sm:text-3xl font-heading font-bold mb-3 tracking-tight ${pkg.featured ? 'text-white' : 'text-foreground'}`}>{pkg.name}</h3>
                                 <p className={`mb-10 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest ${pkg.featured ? 'text-white/80' : 'text-muted-foreground'}`}>
                                     <Calendar size={14} className="text-primary" /> {pkg.duration}
                                 </p>
 
                                 <div className={`mb-10 flex items-baseline gap-2 ${pkg.featured ? 'text-white' : 'text-foreground'}`}>
                                     <span className={`text-[10px] font-bold uppercase tracking-widest ${pkg.featured ? 'opacity-80' : 'text-muted-foreground'}`}>BDT</span>
-                                    <span className="text-5xl font-bold tracking-tighter">{pkg.price}</span>
+                                    <span className="text-4xl sm:text-5xl font-bold tracking-tighter">{pkg.price}</span>
                                     <span className={`text-[10px] font-bold uppercase tracking-widest ${pkg.featured ? 'opacity-80' : 'text-muted-foreground'}`}>Pkg</span>
                                 </div>
 
@@ -86,7 +86,7 @@ export default function Packages({ showHeading = true }: { showHeading?: boolean
                                     ))}
                                 </ul>
 
-                                <Link href="/booking" className="block text-center w-full py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow-xl active:scale-95 text-white bg-sunset-gradient hover:shadow-primary/30 group-hover:scale-102">
+                                <Link href={`/booking?package=${encodeURIComponent(pkg.name)}`} className="block text-center w-full py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow-xl active:scale-95 text-white bg-sunset-gradient hover:shadow-primary/30 group-hover:scale-102">
                                     Secure Package
                                 </Link>
                             </div>

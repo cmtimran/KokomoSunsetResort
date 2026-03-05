@@ -22,7 +22,7 @@ export default function Amenities({ showHeading = true }: { showHeading?: boolea
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
                         <div className="space-y-4">
                             <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">Unmatched Comfort</span>
-                            <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground">World-Class Facilities</h2>
+                            <h2 className="text-4xl md:text-6xl font-heading font-bold text-foreground">World-Class Facilities</h2>
                             <div className="h-1.5 w-24 bg-sunset-gradient rounded-full" />
                         </div>
                         <p className="text-lg text-muted-foreground max-w-xl font-light leading-relaxed">

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Camera, Image as ImageIcon, MapPin, Heart, X } from 'lucide-react'
 
 const galleryImages = [
@@ -27,13 +28,13 @@ export default function Gallery({ showHeading = true }: { showHeading?: boolean 
                     <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
                         <div className="space-y-4">
                             <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">Capturing Essence</span>
-                            <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground">Visual Gallery</h2>
+                            <h2 className="text-4xl md:text-6xl font-heading font-bold text-foreground">Visual Gallery</h2>
                             <div className="h-1.5 w-24 bg-sunset-gradient rounded-full" />
                         </div>
-                        <button className="group flex items-center gap-3 py-4 px-10 bg-primary text-white rounded-full font-bold transition-all duration-500 shadow-xl shadow-primary/20 hover:shadow-primary/40 active:scale-95">
+                        <Link href="/gallery" className="group flex items-center gap-3 py-4 px-10 bg-primary text-white rounded-full font-bold transition-all duration-500 shadow-xl shadow-primary/20 hover:shadow-primary/40 active:scale-95 hover:scale-[1.02]">
                             <ImageIcon size={20} className="group-hover:rotate-12 transition-transform" />
                             <span className="uppercase tracking-[0.2em] text-[10px]">Explore All Frames</span>
-                        </button>
+                        </Link>
                     </div>
                 )}
 

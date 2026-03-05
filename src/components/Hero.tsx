@@ -57,32 +57,32 @@ export default function Hero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
-                <div className="max-w-4xl space-y-8">
+            <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 mt-10 md:pt-0 text-center text-white">
+                <div className="max-w-4xl space-y-7">
                     <div className="inline-block px-4 py-1.5 mb-4 rounded-full border border-white/30 glass-dark text-xs font-bold tracking-widest uppercase animate-slideUp">
                         Experience the Extraordinary
                     </div>
 
-                    <h1 className="font-heading text-6xl font-bold md:text-8xl lg:text-9xl leading-tight tracking-tighter drop-shadow-2xl animate-fadeIn">
+                    <h1 className="font-heading text-5xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tighter drop-shadow-2xl animate-fadeIn">
                         <span className="block text-white">Kokomo</span>
                         <span className="block text-gradient">Sunset Resort</span>
                     </h1>
 
-                    <p className="mt-6 text-xl font-light md:text-2xl lg:text-3xl max-w-2xl mx-auto drop-shadow-md text-white/90 animate-slideUp">
+                    <p className="mt-2 text-lg sm:text-xl font-light md:text-2xl lg:text-3xl max-w-2xl mx-auto drop-shadow-md text-white/90 animate-slideUp">
                         {slides[currentSlide].subtitle}
                     </p>
 
-                    <div className="flex flex-col gap-6 pt-10 sm:flex-row justify-center animate-slideUp">
+                    <div className="flex flex-col gap-3 sm:gap-6 pt-4 sm:pt-2 sm:flex-row justify-center animate-slideUp w-full px-4 sm:px-0">
                         <Link
                             href="/booking"
-                            className="relative group/btn-hero shadow-2xl overflow-hidden px-14 py-6 rounded-full text-lg font-bold transition-all hover:shadow-primary/40 active:scale-95 text-white bg-sunset-gradient flex items-center justify-center min-w-[200px]"
+                            className="relative group/btn-hero shadow-2xl overflow-hidden px-8 py-4 sm:px-14 sm:py-6 rounded-full text-base sm:text-lg font-bold transition-all hover:shadow-primary/40 active:scale-95 text-white bg-sunset-gradient flex items-center justify-center min-w-[200px]"
                         >
                             <span className="relative z-10 uppercase tracking-widest text-sm">Book Now</span>
                             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn-hero:translate-y-0 transition-transform duration-500" />
                         </Link>
                         <Link
                             href="#cinematic-tour"
-                            className="group relative rounded-full border border-white/50 backdrop-blur-md px-14 py-6 text-lg font-bold transition-all active:scale-95 overflow-hidden flex items-center justify-center min-w-[200px] text-white"
+                            className="group relative rounded-full border border-white/50 backdrop-blur-md px-8 py-4 sm:px-14 sm:py-6 text-base sm:text-lg font-bold transition-all active:scale-95 overflow-hidden flex items-center justify-center min-w-[200px] text-white"
                         >
                             <span className="relative z-10 transition-colors duration-500 group-hover:text-black uppercase tracking-widest text-sm text-center">Cinematic Tour</span>
                             <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
@@ -92,7 +92,7 @@ export default function Hero() {
             </div>
 
             {/* Slide Indicators */}
-            <div className="absolute bottom-12 left-1/2 flex -translate-x-1/2 gap-4 z-20">
+            <div className="absolute bottom-6 md:bottom-4 left-1/2 flex -translate-x-1/2 gap-3 sm:gap-4 z-20">
                 {slides.map((_, index) => (
                     <button
                         key={index}

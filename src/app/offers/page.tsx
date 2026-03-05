@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { Gift, Sparkles, Calendar, ArrowRight, CheckCircle2, Phone, Mail, ArrowLeft, Home, MapPin, Clock } from 'lucide-react'
 import Link from 'next/link'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+
+
 
 const OFFERS = [
     {
@@ -41,7 +41,6 @@ export default function OffersPage() {
 
     return (
         <main className="min-h-screen bg-background">
-            <Navbar />
 
             {/* Hero Section */}
             <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
@@ -56,7 +55,7 @@ export default function OffersPage() {
 
                 <div className="relative z-10 text-center space-y-6 px-4">
                     <span className="text-primary font-bold tracking-[0.4em] uppercase text-xs animate-slideUp">Curated Experiences</span>
-                    <h1 className="text-6xl md:text-8xl font-heading font-bold text-white tracking-tighter animate-fadeIn">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-heading font-bold text-white tracking-tighter animate-fadeIn">
                         Exclusive <span className="text-gradient">Offers</span>
                     </h1>
                     <div className="h-2 w-32 bg-sunset-gradient mx-auto rounded-full" />
@@ -115,7 +114,7 @@ export default function OffersPage() {
 
                                 <div className="mt-16 pt-12 border-t border-muted flex flex-col sm:flex-row gap-6">
                                     <Link
-                                        href="/#contact"
+                                        href={`/booking?offer=${encodeURIComponent(selectedOffer.name)}`}
                                         className="flex-1 py-6 bg-sunset-gradient text-white text-center rounded-3xl font-bold uppercase tracking-widest text-xs shadow-2xl shadow-primary/30 hover:scale-105 transition-all"
                                     >
                                         Claim This Experience
@@ -185,8 +184,6 @@ export default function OffersPage() {
                     </div>
                 )}
             </section>
-
-            <Footer />
         </main>
     )
 }

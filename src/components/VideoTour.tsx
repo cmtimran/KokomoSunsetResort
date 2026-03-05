@@ -16,16 +16,16 @@ export default function VideoTour() {
     const [activeVideoId, setActiveVideoId] = useState<string | null>(null)
 
     return (
-        <section id="cinematic-tour" className="py-32 bg-charcoal relative overflow-hidden">
+        <section id="cinematic-tour" className="py-20 md:py-32 bg-charcoal relative overflow-hidden">
             {/* Background Aesthetics */}
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
             <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="text-center mb-24 space-y-4">
+                <div className="text-center mb-12 md:mb-24 space-y-4">
                     <span className="text-primary font-bold tracking-[0.4em] uppercase text-xs">Visual Storytelling</span>
-                    <h2 className="text-5xl md:text-6xl font-heading font-bold text-white">Cinematic <span className="text-gradient">Tour</span></h2>
+                    <h2 className="text-4xl md:text-6xl font-heading font-bold text-white">Cinematic <span className="text-gradient">Tour</span></h2>
                     <div className="h-1.5 w-24 bg-sunset-gradient mx-auto rounded-full" />
                     <p className="text-lg text-white/60 max-w-2xl mx-auto font-light leading-relaxed">
                         Immerse yourself in the tranquility and grandeur of Kokomo through our curated cinematic experiences.
@@ -52,12 +52,12 @@ export default function VideoTour() {
                                     </div>
                                 </div>
 
-                                <div className="absolute bottom-0 left-0 right-0 p-10 bg-gradient-to-t from-black/95 via-black/50 to-transparent">
+                                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 bg-gradient-to-t from-black/95 via-black/50 to-transparent">
                                     <div className="flex items-center gap-3 text-primary mb-3">
                                         <Youtube size={18} />
                                         <span className="text-[10px] uppercase font-bold tracking-[0.3em]">Watch Cinematic Preview</span>
                                     </div>
-                                    <h3 className="text-3xl font-heading font-bold text-white mb-2">{video.title}</h3>
+                                    <h3 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-2">{video.title}</h3>
                                     <p className="text-white/60 font-light leading-relaxed mb-6">{video.description}</p>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ export default function VideoTour() {
                 </div>
 
                 {/* Promotional Banner */}
-                <div className="mt-24 p-12 glass-dark rounded-[3.5rem] border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-12 group/banner overflow-hidden relative">
+                <div className="mt-16 md:mt-24 p-6 sm:p-12 glass-dark rounded-[3.5rem] border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-12 group/banner overflow-hidden relative">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] group-hover/banner:bg-primary/20 transition-all duration-700" />
 
                     <div className="flex items-center gap-8 relative z-10">
@@ -74,7 +74,7 @@ export default function VideoTour() {
                             <Sparkles size={36} />
                         </div>
                         <div className="space-y-2">
-                            <h4 className="text-3xl font-heading font-bold text-white">Experience it Live</h4>
+                            <h4 className="text-2xl sm:text-3xl font-heading font-bold text-white">Experience it Live</h4>
                             <p className="text-white/60 text-lg font-light leading-relaxed max-w-lg">
                                 While video captures the vision, only a visit captures the soul. Reserve your sanctuary today.
                             </p>
@@ -83,7 +83,7 @@ export default function VideoTour() {
 
                     <a
                         href="/booking"
-                        className="relative z-10 px-14 py-6 bg-white text-black font-bold rounded-[2rem] hover:bg-primary hover:text-white transition-all text-[11px] uppercase tracking-[0.3em] shadow-2xl active:scale-95 text-center"
+                        className="relative z-10 px-8 py-4 sm:px-14 sm:py-6 bg-white text-black font-bold rounded-[2rem] hover:bg-primary hover:text-white transition-all text-[11px] uppercase tracking-[0.3em] shadow-2xl active:scale-95 text-center"
                     >
                         Book Your Stay
                     </a>
@@ -97,7 +97,7 @@ export default function VideoTour() {
                     onClick={() => setActiveVideoId(null)}
                 >
                     <button
-                        className="absolute top-10 right-10 text-white/50 hover:text-white transition-all p-4 bg-white/5 rounded-full hover:bg-white/10 z-[1001]"
+                        className="absolute top-4 right-4 sm:top-10 sm:right-10 text-white/50 hover:text-white transition-all p-4 bg-white/5 rounded-full hover:bg-white/10 z-[1001]"
                         onClick={() => setActiveVideoId(null)}
                     >
                         <X size={32} />

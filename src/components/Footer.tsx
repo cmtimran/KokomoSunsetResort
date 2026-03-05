@@ -1,7 +1,20 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
-import { Facebook, Instagram, Youtube, MapPin, Phone, Mail } from 'lucide-react'
+import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, CheckCircle2 } from 'lucide-react'
 
 export default function Footer() {
+    const [email, setEmail] = useState('')
+    const [isSubscribed, setIsSubscribed] = useState(false)
+
+    const handleSubscribe = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (email) {
+            setIsSubscribed(true)
+            setEmail('')
+        }
+    }
     return (
         <footer className="bg-charcoal text-white pt-24 pb-12 relative overflow-hidden">
             {/* Background Accent */}
@@ -78,19 +91,35 @@ export default function Footer() {
                     <div className="space-y-8">
                         <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-primary">Newsletter</h4>
                         <p className="text-sm text-gray-400 font-light leading-relaxed">Subscribe for curated weekend experiences and seasonal offers.</p>
-                        <form className="relative group">
-                            <input
-                                type="email"
-                                placeholder="Your perspective"
-                                className="bg-white/5 border border-white/10 outline-none text-white px-6 py-4 w-full text-xs rounded-2xl focus:bg-white/10 focus:border-primary/50 transition-all font-light"
-                            />
-                            <button
-                                type="button"
-                                className="absolute right-2 top-2 bottom-2 bg-primary hover:bg-primary/90 px-4 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95"
-                            >
-                                Join
-                            </button>
-                        </form>
+
+                        {isSubscribed ? (
+                            <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 flex items-center gap-4 text-white animate-fadeIn">
+                                <div className="p-2 bg-primary rounded-full">
+                                    <CheckCircle2 size={16} />
+                                </div>
+                                <div className="space-y-1">
+                                    <p className="text-[11px] font-bold uppercase tracking-widest text-primary">Subscribed</p>
+                                    <p className="text-xs text-white/70 font-light">Welcome to our inner circle.</p>
+                                </div>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubscribe} className="relative group">
+                                <input
+                                    type="email"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Your email address"
+                                    className="bg-white/5 border border-white/10 outline-none text-white px-6 py-4 w-full text-xs rounded-2xl focus:bg-white/10 focus:border-primary/50 transition-all font-light"
+                                />
+                                <button
+                                    type="submit"
+                                    className="absolute right-2 top-2 bottom-2 bg-primary hover:bg-primary/90 px-5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                                >
+                                    Join
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </div>
 

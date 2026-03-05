@@ -26,18 +26,18 @@ export function ThemeSwitcher() {
     return (
         <div className="fixed bottom-10 left-10 z-[99999] group/switcher animate-fadeIn">
             {/* Elegant Floating Label */}
-            <div className="absolute left-24 top-1/2 -translate-y-1/2 bg-foreground/90 backdrop-blur-md text-white px-5 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover/switcher:opacity-100 transition-all duration-500 whitespace-nowrap pointer-events-none shadow-[20px_0_50px_rgba(0,0,0,0.2)] border border-white/10 translate-x-4 group-hover/switcher:translate-x-0">
+            <div className="absolute left-16 top-1/2 -translate-y-1/2 bg-foreground/90 backdrop-blur-md text-white px-5 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover/switcher:opacity-100 transition-all duration-500 whitespace-nowrap pointer-events-none shadow-[20px_0_50px_rgba(0,0,0,0.2)] border border-white/10 translate-x-4 group-hover/switcher:translate-x-0">
                 Change Resort Theme
             </div>
 
             {/* Main Floating Button (The "WhatsApp" for Themes) */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl relative overflow-hidden group/btn ${isOpen ? 'bg-foreground text-white scale-90 rotate-90' : 'bg-primary text-white hover:scale-110 active:scale-95 animate-bounce-slow'
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl relative overflow-hidden group/btn ${isOpen ? 'bg-foreground text-white scale-90 rotate-90' : 'bg-primary text-white hover:scale-110 active:scale-95 animate-bounce-slow'
                     }`}
                 aria-label="Switch Theme"
             >
-                <Palette size={32} strokeWidth={2.5} className="text-white relative z-10" />
+                <Palette size={24} strokeWidth={2.5} className="text-white relative z-10" />
 
                 {/* Subtle pulsing animation to catch the eye */}
                 {!isOpen && (

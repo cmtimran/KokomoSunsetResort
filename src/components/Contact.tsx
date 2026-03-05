@@ -27,7 +27,7 @@ export default function Contact({ showHeading = true }: { showHeading?: boolean 
         setIsSuccess(false)
     }
     return (
-        <section id="contact" className="py-32 bg-background relative overflow-hidden">
+        <section id="contact" className="py-20 md:py-32 bg-background relative overflow-hidden">
             {/* Artistic Background Elements */}
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
             <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[60%] bg-primary/5 rounded-full blur-[120px] -z-10" />
@@ -41,7 +41,7 @@ export default function Contact({ showHeading = true }: { showHeading?: boolean 
                         {showHeading && (
                             <div className="space-y-6">
                                 <span className="text-primary font-bold tracking-[0.4em] uppercase text-[10px] block animate-slideUp">An Eternal Connection</span>
-                                <h2 className="text-6xl md:text-7xl font-heading font-bold text-foreground leading-[1.1] animate-fadeIn">
+                                <h2 className="text-5xl md:text-7xl font-heading font-bold text-foreground leading-[1.1] animate-fadeIn">
                                     Get In <span className="text-gradient">Touch</span>
                                 </h2>
                                 <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-md">
@@ -56,13 +56,13 @@ export default function Contact({ showHeading = true }: { showHeading?: boolean 
                                 { title: 'Direct Reservations', icon: Phone, content: '+880 1894 953 780-82', label: 'Call Now' },
                                 { title: 'Email Enquiries', icon: Mail, content: 'reservation.kokomoresort@gmail.com', label: 'Send Email' }
                             ].map((item, idx) => (
-                                <div key={idx} className="group flex items-start gap-6 p-6 rounded-[2rem] hover:bg-muted transition-all duration-500 cursor-pointer border border-transparent hover:border-muted-foreground/10">
+                                <div key={idx} className="group flex items-start gap-4 sm:gap-6 p-5 sm:p-6 rounded-[2rem] hover:bg-muted transition-all duration-500 cursor-pointer border border-transparent hover:border-muted-foreground/10">
                                     <div className="p-4 bg-primary/10 text-primary rounded-2xl group-hover:bg-primary group-hover:text-white transition-all duration-500">
                                         <item.icon size={24} strokeWidth={1.5} />
                                     </div>
                                     <div className="space-y-1">
-                                        <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">{item.title}</h3>
-                                        <p className="text-xl font-bold text-foreground">{item.content}</p>
+                                        <h3 className="text-[10px] sm:text-sm font-bold text-muted-foreground uppercase tracking-widest">{item.title}</h3>
+                                        <p className="text-lg sm:text-xl font-bold text-foreground">{item.content}</p>
                                         <div className="flex items-center gap-1 text-[10px] uppercase font-bold text-primary tracking-widest opacity-0 group-hover:opacity-100 transition-opacity pt-1">
                                             {item.label} <ArrowUpRight size={10} />
                                         </div>
@@ -72,7 +72,7 @@ export default function Contact({ showHeading = true }: { showHeading?: boolean 
                         </div>
 
                         {/* Social Connection Hub */}
-                        <div className="p-10 glass rounded-[3rem] border border-white/40 shadow-2xl space-y-6">
+                        <div className="p-6 sm:p-10 glass rounded-[3rem] border border-white/40 shadow-2xl space-y-6">
                             <h4 className="text-sm font-bold text-foreground uppercase tracking-widest">Connect with our story</h4>
                             <div className="flex gap-4">
                                 {[
@@ -92,7 +92,7 @@ export default function Contact({ showHeading = true }: { showHeading?: boolean 
                     {/* Right Side: Immersive Contact Form */}
                     <div className="lg:col-span-7 relative">
                         <div className="absolute -inset-4 bg-primary/10 rounded-[4rem] blur-3xl -z-10" />
-                        <div className="bg-card p-10 md:p-16 rounded-[4rem] shadow-2xl border border-white/40 relative overflow-hidden">
+                        <div className="bg-card p-6 sm:p-10 md:p-16 rounded-[3rem] sm:rounded-[4rem] shadow-2xl border border-white/40 relative overflow-hidden">
                             {/* Decorative background text */}
                             <div className="absolute -top-10 -right-10 text-[12rem] font-bold text-muted/30 select-none pointer-events-none heading-font opacity-20 rotate-12">
                                 Hello
@@ -100,7 +100,7 @@ export default function Contact({ showHeading = true }: { showHeading?: boolean 
 
                             <form onSubmit={handleSubmit} className="relative z-10 space-y-12">
                                 <div className="space-y-2">
-                                    <h3 className="text-3xl font-heading font-bold text-foreground">Send A Message</h3>
+                                    <h3 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">Send A Message</h3>
                                     <p className="text-muted-foreground text-sm font-light">Have an inquiry or feedback? We'd love to hear from you.</p>
                                 </div>
 
@@ -144,7 +144,7 @@ export default function Contact({ showHeading = true }: { showHeading?: boolean 
                                 <button
                                     type="submit"
                                     disabled={!name || !email || !message || isSubmitting}
-                                    className="group w-full py-8 rounded-[2rem] font-bold flex items-center justify-center gap-6 transition-all duration-500 shadow-2xl hover:shadow-primary/40 active:scale-95 overflow-hidden relative text-white bg-sunset-gradient disabled:opacity-60 disabled:cursor-not-allowed"
+                                    className="group w-full py-5 sm:py-8 rounded-[2rem] font-bold flex items-center justify-center gap-6 transition-all duration-500 shadow-2xl hover:shadow-primary/40 active:scale-95 overflow-hidden relative text-white bg-sunset-gradient disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
                                     <span className="relative z-10 uppercase tracking-[0.3em] text-xs">
                                         {isSubmitting ? 'Sending...' : 'Send Message'}
